@@ -1,0 +1,28 @@
+📂 GitHub Write-up: OverTheWire Bandit Level 12
+Objective: Decompress a file that has been repeatedly compressed using different methods.
+
+📝 Executive Summary
+This challenge required the identification and extraction of a data file that had been obfuscated through multiple layers of compression (Gzip, Bzip2, and Tar). This exercise simulates real-world malware analysis where attackers "pack" or "compress" malicious code multiple times to bypass signature-based detection.
+
+🛠️ Technical Analysis & Commands
+I utilized the hexdump tool to identify file signatures (Magic Bytes) and renamed files accordingly to allow the correct decompression utilities to run. 
+
+Preparation: Used mkdir /tmp/sankalp_audit to create a workspace and cp data.txt /tmp/sankalp_audit to avoid altering the original file. 
+Identification: Ran xxd -r data.txt > data_binary to convert the hex dump back into a binary file. 
+
+The Decompression Loop:
+Gzip: Identified by file command; decompressed with mv file file.gz && gunzip file.gz. 
+Bzip2: Identified by file command; decompressed with bzip2 -d file. 
+Tar: Identified by file command; decompressed with tar -xf file. 
+
+🛡️ Mapping to MITRE ATT&CK
+
+Tactics: Evasion 
+Technique: T1027 - Obfuscated Files or Information. 
+Analyst Note: Attackers use these methods to hide their tools from basic security scanners. My ability to manually decompress these layers ensures that I can analyze the "payload" hidden inside. 
+
+
+💡 Analyst Key Takeaways
+Precision: One wrong file extension prevents the decompression tool from working. 
+Tooling: Mastered xxd, file, gzip, bzip2, and tar. 
+Methodology: Developed a repeatable workflow for analyzing unknown file types, a core skill for Threat Intelligence and Forensics.

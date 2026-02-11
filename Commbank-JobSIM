@@ -1,0 +1,34 @@
+📋 Executive Summary
+During this industry-led simulation with Commonwealth Bank, I functioned as a Cyber Threat Intelligence Analyst. The focus was on identifying, analyzing, and disseminating actionable intelligence regarding adversary tactics to protect the bank's digital infrastructure.
+
+🛠️ Core Competencies Demonstrated
+
+Threat Data Analysis: Analyzed raw threat data to identify TTPs (Tactics, Techniques, and Procedures) and IOCs (Indicators of Compromise).
+
+Intelligence Lifecycle: Applied the end-to-end intelligence lifecycle to research and monitor threat actor campaigns.
+
+SIEM Proficiency: Utilized Splunk for aggregate log analysis across firewall and network logs to detect anomalous activity.
+
+Technical Reporting: Disseminated intelligence reports and situational awareness to stakeholders during crisis simulations.
+
+🛡️ Technical Deep Dive
+1. Adversary Analysis & TTP Identification
+Investigated simulated exploitation methods to determine the intent and capability of threat actors.
+
+Mapped findings to the MITRE ATT&CK framework to categorize adversary behavior.
+
+2. Incident Contextualization
+Collaborated with the Security Operations Centre (SOC) and Threat Hunters to provide real-time intelligence support.
+
+Aided in the swift contextualization of threats, allowing for accelerated response and containment.
+
+3. Operational Uplift
+Partnered with security teams to update and maintain SOPs, Incident Response playbooks, and operational runbooks.
+
+Supported detection engineers in uplifting security posture based on intelligence-derived insights.
+
+🧠 Key Takeaways
+
+Actionable Intelligence: Learned that intelligence is only valuable if it drives a specific security action or decision.
+
+Stakeholder Communication: Developed the ability to translate complex technical threats into clear, timely communications for non-technical stakeholders during a crisis.

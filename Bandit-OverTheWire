@@ -26,3 +26,137 @@ Analyst Note: Attackers use these methods to hide their tools from basic securit
 Precision: One wrong file extension prevents the decompression tool from working. 
 Tooling: Mastered xxd, file, gzip, bzip2, and tar. 
 Methodology: Developed a repeatable workflow for analyzing unknown file types, a core skill for Threat Intelligence and Forensics.
+
+Level 1 🚩
+
+Objective – Enter password  
+
+Vulnerability class - Information disclosure 
+
+Description – Password hidden in HTML code of the page.  
+
+Evidence – Password written as comment inside HTML code. 
+
+Impact – Bypass login page.  
+
+What I learned – Never store passwords on client’s side and Validate passwords server-sides  to avoid such breaches in the future. 
+
+Level 2 🚩
+
+Objective – to find and enter password 
+
+Vulnerability – Broken Access Control  
+
+Description – Since there was no password to stored and compare the passwords.  
+
+Evidence – No input needed for the password field.  
+
+Impact – Security Bypass. 
+
+What I learned – HTML doesn’t throw errors if some files are missing, instead it just runs what is working. To fix these issues we must use server-side authentication, Validate all input and handle errors  
+
+Level 3 🚩
+
+Objective – Find password hidden in HTML page 
+
+Vulnerability – Data Exposure  
+
+Description – File with password is readable and easy accessible by the attacker. Any information could be compromised.  
+
+Evidence – When attacker changed the URL and added password.php, Password was visible to the attacker.  
+
+What I learned – File types in HTML and importance of secret handling. How to safely store sensitive data. This problem could be fixed by moving the passwords away from client’s side directory. Add server-side security policies that block code that could display sensitive information. Perform server-side checks to ensure authenticity.   
+
+Level 4  🚩
+
+Objective – Edit default email and redirect the password to your own email. 
+
+Vulnerability – HTML manipulation  
+
+Description – In case Sam forgets the password, He can retrieve it on his email address. By adding attacker’s email attacker is able to access the site with Sam’s password.  
+
+Evidence – Click send password to sam button and wait to get the password in your email. Enter the password you received.  
+
+What I learned – How HTML manipulation lets us receive the email when are not the actual user, This type of attack steals sensitive data without the victim’s knowledge. We can implement a policy that sends a single-use token to the user’s verified email only.  
+
+Level 5 🚩
+
+Objective – Change the email address in HTML code to get the password 
+
+Vulnerability – HTML manipulation 
+
+Description – Sam get the password to his email from a password file, This is still vulnerable as anyone could change the email address to receive the password.  
+
+Evidence – You receive the password that successfully logins in the page. 
+
+What I learned – Even if the password file is stored securely there is a possibility that attacker might change the retrieval methods to gain access to data. Again, we could use a policy that sends a single-use token to the user’s verified email only. 
+
+Level 6 🚩  
+
+Objective- Decrypt a string to gain access to the system.  
+
+Vulnerability – Cryptographic Failure 
+
+Description – Attacker finds the type of encryption used as it is made easily available. Reverse engineering encryption process gives attacker the password.	 
+
+Evidence – Attacker can try and learn encryption process, Once the attacker learns about encryption used. Attacker can use programs, reverse engineering methods and other tools to get the password. 
+
+What  I learned – To fix these types of issues we could use hashing algorithms as these are harder to decrypt.  
+
+Level 7 🚩
+
+Objective- Find a unknown file store in the current directory of the webpage that has password stored in it. 
+
+Vulnerability- Injection Attack 
+
+Description- We can use a command line vulnerability to get the list of files in the current directory, Then simply access the webpage that stores the password. 
+
+Evidence- Attacker used a command line injection in the view query of the webpage, This command ran a query with all the information and a list of files inside this directory.  
+
+What I learned – How command line injections can manipulate data querying and potentially hand sensitive information to the attackers. I have also learned different types of command injections. Input validation could block some shell commands from executing. This along with sanitizing the output, would stop shell commands from being executed and display any output.   
+
+Level 8 🚩 
+
+Objective- Password file is located inside the webapp. Find the vulnerability to gain access to the password. 
+
+Vulnerability- Server Side Includes (SSI) attacks  
+
+Description- When we enter a username it gets stored in tmp file with .shtml extension, we simply send a SSI that runs the command to list files inside the directory.  
+
+Evidence – We run <! --#exec cmd =”ls ../” --> this will run after the user has clicked submit button, and returns a the list of all files under current directory. Then simple editing the URL to add the file path gives us access to the password. 
+
+What I learned – Disabling  server-side includes would significantly drop the risk of SSI attacks. Make the storage path hidden on the client-side.  
+
+Level 9 🚩 
+
+Objective- Use SSI to get the password file. However, this level only has a password submission box.  
+
+Vulnerability – SSI attacks, Command line attacks. 
+
+Description- Since we don’t have any other field to run our SSI we go back to level 8, We run same code as we did in level 8 but change the directory’s path.  
+
+Evidence- When executed this command gives same result as we had in level 8 the difference here is we get a list of files in level 9 folder. In this list of files we get a php page that has the password stored inside it. 
+
+What I learned- This vulnerability could be avoided by using server configuration, add policies that automatically block such injections so that server always rejects them and never runs them.  
+
+Level 10 🚩 
+
+Objective- View and edit cookie to gain access. 
+
+Vulnerability – Cookie Manipulation 
+
+Description-Here we have a password field only on the page, In order to gain access we must edit the cookies. Also we don’t need any password or password file in this level.  
+
+Evidence- We inspect the page and enter application tab of developer page, there we can find cookies folder wherein cookie is stored we only need to change current sessions’ cookie to gain access. In order to do so we simply change the value of cookie to yes from being a no.  
+
+What I learned -  Server side sessions handles this vulnerability, as the session management is handled on the server and cant be manipulated. In addition to this, using encrypted cookies instead of plain text cookies makes it much more difficulty to read and write any changes to it.  
+
+Level 11 🚩 
+
+Objective -Use htaccess to find the password for this level.  
+
+Vulnerability- htaccess 
+
+Description- Initially we find the path to hidden file, then we use htaccess to access the file. We find a clue to access the password page, Then we visit the webpage and the password in hidden in plain sight, Hidden with wordplay. Then we visit 11/index.php page that asks us for a password, We enter password and gain complete this level.  
+
+What I learned – how htaccess makes the apache config vulnerable to make it more secure we could harden htaccess rules, this could be done by remove indexes option. Blocking access to dotfiles. Protect directories with basic authentication to ensure sensitive storage paths are not exposed.  
